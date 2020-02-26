@@ -92,7 +92,6 @@ exports.login = (req, res) => {
           userData.userHandle = data.handle;
           userData.email = data.email;
           jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-            console.log("token : " + token);
             res.json({ token });
           });
         }
@@ -115,7 +114,6 @@ exports.getAllUsers = (req, res) => {
         console.log(err);
       } else {
         res.status(200).json({ data });
-        console.log(data);
       }
     });
 };
