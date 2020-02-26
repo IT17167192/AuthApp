@@ -5,8 +5,9 @@ app.use(bodyParser.json());
 const path = require("path");
 
 const db = require("./util/db");
+const middleware = require("./util/AuthMiddleware");
 
-const { signup, login } = require("./handlers/users");
+const { signup, login, getAllUsers } = require("./handlers/users");
 
 db.connect(err => {
   if (err) {
@@ -22,3 +23,4 @@ db.connect(err => {
 //Signup route
 app.post("/signup", signup);
 app.post("/login", login);
+app.get("/users", middleware, getAllUsers);

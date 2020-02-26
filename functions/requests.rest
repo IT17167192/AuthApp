@@ -1,0 +1,23 @@
+GET http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ5dWdtYUBnbWFpbC5jb20iLCJwYXNzd29yZCI6Inl1Z21hQHNlcDE5OTUiLCJpYXQiOjE1ODI3MjgyMDd9.TpRw9wXAwUB8m07xW3CAyOFoeoL_Ii-mxH-tNtqHfIs
+###
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "fyugma@gmail.com",
+	"password": "yugma@sep1995"
+}
+
+###
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+  "email": "name@gmail.com",
+  "password": "",
+  "confirmPassword": "",
+  "handle": ""
+}
+
+###

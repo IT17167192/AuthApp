@@ -1,3 +1,4 @@
+require("dotenv").config();
 const db = require("../util/db");
 const { validateSignupData, validateLoginData } = require("../util/validators");
 const bcrypt = require("bcrypt");
@@ -48,7 +49,7 @@ exports.signup = (req, res) => {
               userData.objectId = data.ops[0]._id;
             }
             // data: data, document: data.ops[0],
-            jwt.sign(newUser, "AuthAppSecretKey", (err, token) => {
+            jwt.sign(newUser, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
               res.status(201).json({ token });
             });
           })
@@ -90,7 +91,8 @@ exports.login = (req, res) => {
           userData.objectId = data._id;
           userData.userHandle = data.handle;
           userData.email = data.email;
-          jwt.sign(user, "AuthAppSecretKey", (err, token) => {
+          jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
+            console.log("token : " + token);
             res.json({ token });
           });
         }
@@ -101,5 +103,19 @@ exports.login = (req, res) => {
       return res
         .status(403)
         .json({ genaral: "Wrong credentials, please try again" });
+    });
+};
+
+exports.getAllUsers = (req, res) => {
+  db.getDB()
+    .collection(collection)
+    .find({})
+    .toArray((err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(200).json({ data });
+        console.log(data);
+      }
     });
 };
